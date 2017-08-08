@@ -32,7 +32,13 @@ window.onload = function()
             lat: 19.4477107,
             lng: -99.2171927,
             title: 'Sam\'s Club Toreo'
-        }
+        },
+        {
+            lat: 19.4373714,
+            lng: -99.2056145,
+            title: 'Superama Polanco'
+        },
+
     ];
 
     navigator.geolocation.getCurrentPosition(
@@ -61,7 +67,16 @@ window.onload = function()
 
             $('#sams').attr('position',difSams.x+' 0.5 '+difSams.y);
 
-            console.log(convStart,conv,convSams,dif,difSams)
+            var convSup    = convert(stores[2].lat,stores[2].lng);
+            var difSup     =
+            {
+                x: convStart.x - convSup.x,
+                y: convStart.y - convSup.y
+            }
+            $('#supPol').attr('position',difSup.x+' 0.5 '+difSup.y);
+
+
+            console.log(convStart,conv,convSams,dif,difSams,difSup)
 
 
         },
@@ -83,8 +98,9 @@ window.onload = function()
 
 
 
-            document.getElementById('distance').innerHTML       = calculateDistance(stores[0].lat, stores[0].lng,position.coords.latitude, position.coords.longitude);
-            document.getElementById('distanceSams').innerHTML   = calculateDistance(stores[1].lat, stores[1].lng,position.coords.latitude, position.coords.longitude);
+            document.getElementById('distance').innerHTML           = calculateDistance(stores[0].lat, stores[0].lng,position.coords.latitude, position.coords.longitude);
+            document.getElementById('distanceSams').innerHTML       = calculateDistance(stores[1].lat, stores[1].lng,position.coords.latitude, position.coords.longitude);
+            document.getElementById('distanceSuperama').innerHTML   = calculateDistance(stores[2].lat, stores[2].lng,position.coords.latitude, position.coords.longitude);
         });
 };
 
