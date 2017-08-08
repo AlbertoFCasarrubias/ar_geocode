@@ -30,7 +30,18 @@
     </p>
 </div>
 <a-scene>
-    <a-box id="superama" position="-3.13749999 0.5 -5.0527777" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-assets>
+        <a-asset-item id="superama-obj" src="obj/spark.obj"></a-asset-item>
+        <a-asset-item id="superama-mtl" src="obj/spark.mtl"></a-asset-item>
+    </a-assets>
+    <a-entity id="superama" obj-model="obj: #superama-obj; mtl: #superama-mtl" rotation="0 90 0" position="3 0 -3" scale=".05 .05 .05" >
+        <a-animation attribute="rotation"
+                     dur="5000"
+                     fill="forwards"
+                     to="0 360 0"
+                     repeat="indefinite"></a-animation>
+    </a-entity>
+    <!--a-box id="superama" position="-3.13749999 0.5 -5.0527777" rotation="0 45 0" color="#4CC3D9"></a-box-->
     <a-sphere id="sams" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
     <a-cylinder id="supPol" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>

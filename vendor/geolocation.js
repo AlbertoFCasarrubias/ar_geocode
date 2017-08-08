@@ -75,8 +75,16 @@ window.onload = function()
             }
             $('#supPol').attr('position',difSup.x+' 0.5 '+difSup.y);
 
+            var offset = 10000;
+            var difCoordenads = {
+                x: (startPos.coords.latitude     - stores[0].lat)*offset,
+                y: (startPos.coords.longitude    - stores[0].lng)*offset
+            }
 
-            console.log(convStart,conv,convSams,dif,difSams,difSup)
+            $('#sams').attr('position',difCoordenads.x+' 0.5 '+difCoordenads.y);
+            console.log(dif,difCoordenads)
+
+
 
 
         },
