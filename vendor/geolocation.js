@@ -225,18 +225,19 @@ window.onload = function()
 
             var convStart   = convert(startPos.coords.latitude,startPos.coords.longitude);
             var conv        = convert(stores[s].lat,stores[s].lng);
-            var difCoordenads         =
+            var difCoordenads =
             {
                 x: convStart.x - conv.x,
                 y: convStart.y - conv.y
             }
 
-            /*
-            var difCoordenads = {
+
+            difCoordenads =
+            {
                 x: (startPos.coords.latitude     - stores[s].lat)*offset,
                 y: (startPos.coords.longitude    - stores[s].lng)*offset
             }
-            */
+
 
             var scene = document.querySelector('a-scene');
 
