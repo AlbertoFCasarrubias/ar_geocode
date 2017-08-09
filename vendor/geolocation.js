@@ -9,6 +9,25 @@ else
     alert('Geolocation is not supported for this Browser/OS version yet.');
 }
 
+if (window.DeviceOrientationEvent) {
+
+    window.addEventListener("deviceorientation", function(event)
+    {
+
+        var xValue      = Math.round(event.gamma);
+        var yValue      = Math.round(event.beta);
+        var rotation    = Math.round(event.alpha);
+
+        $('.orientation').html('xValue :'+xValue + '<br>yValue :'+yValue+ '<br>rotation :'+rotation)
+
+    }, true);
+
+
+
+} else {
+    alert("Sorry, your browser doesn't support Device Orientation");
+}
+
 MAP_WIDTH           = 1000000;
 MAP_HEIGHT          = 1000000;
 var store_current   = null;
@@ -108,6 +127,8 @@ window.onload = function()
             $('#tripmeter').show();
         }
     });
+
+
 
     navigator.geolocation.getCurrentPosition(
         function(position)
