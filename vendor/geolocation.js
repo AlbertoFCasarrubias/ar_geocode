@@ -92,6 +92,23 @@ window.onload = function()
 
     ];
 
+    $('.cerrar').click(function()
+    {
+        $('.info').hide();
+    });
+
+    $('.debug').click(function()
+    {
+        if($('#tripmeter').is(':visible'))
+        {
+            $('#tripmeter').hide();
+        }
+        else
+        {
+            $('#tripmeter').show();
+        }
+    });
+
     navigator.geolocation.getCurrentPosition(
         function(position)
         {
@@ -166,6 +183,7 @@ window.onload = function()
 
             if(store_current!=null)
             {
+                $('.txt.dist').show();
                 $('.txt.dist').html(this.calculateDistance(store_current.lat, store_current.lng,position.coords.latitude, position.coords.longitude)+'m');
             }
 
