@@ -114,7 +114,7 @@ function onHeadingChange(event) {
         }
         */
 
-        //$('#pointers').attr('rotation','0 113 0');
+        $('#pointers').attr('rotation','0 15 0');
 
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
