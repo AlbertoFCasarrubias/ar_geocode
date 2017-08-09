@@ -7,6 +7,12 @@
   left: 0;
   z-index: 9999; }
 
+.brujula {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999; }
+
 .info {
   position: absolute;
   width: 50%;

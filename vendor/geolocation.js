@@ -104,7 +104,8 @@ function onHeadingChange(event) {
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
 
-        $('.orientation').html(positionCurrent.hng)
+        $('.brujula').html(positionCurrent.hng+ "°")
+
         /*
         // apply rotation to compass rose
         if (typeof rose.style.transform !== "undefined") {
