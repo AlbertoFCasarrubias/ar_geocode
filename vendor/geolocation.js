@@ -404,7 +404,7 @@ window.onload = function()
 
     function generatePin(startPos)
     {
-        var offset  = 10000;
+        var offset  = 1000;
         var scene   = document.getElementById('pointers');
 
         for(var s in stores)
