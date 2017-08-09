@@ -10,8 +10,131 @@ else
 }
 
 
+
+// our current position
+var positionHng;
+var defaultOrientation;
+var positionCurrent = {
+    lat: null,
+    lng: null,
+    hng: null
+};
+
+function getBrowserOrientation() {
+    var orientation;
+    if (screen.orientation && screen.orientation.type) {
+        orientation = screen.orientation.type;
+    } else {
+        orientation = screen.orientation ||
+            screen.mozOrientation ||
+            screen.msOrientation;
+    }
+
+    /*
+     'portait-primary':      for (screen width < screen height, e.g. phone, phablet, small tablet)
+     device is in 'normal' orientation
+     for (screen width > screen height, e.g. large tablet, laptop)
+     device has been turned 90deg clockwise from normal
+
+     'portait-secondary':    for (screen width < screen height)
+     device has been turned 180deg from normal
+     for (screen width > screen height)
+     device has been turned 90deg anti-clockwise (or 270deg clockwise) from normal
+
+     'landscape-primary':    for (screen width < screen height)
+     device has been turned 90deg clockwise from normal
+     for (screen width > screen height)
+     device is in 'normal' orientation
+
+     'landscape-secondary':  for (screen width < screen height)
+     device has been turned 90deg anti-clockwise (or 270deg clockwise) from normal
+     for (screen width > screen height)
+     device has been turned 180deg from normal
+     */
+
+    return orientation;
+}
+
+function onHeadingChange(event) {
+    var heading = event.alpha;
+
+    if (typeof event.webkitCompassHeading !== "undefined") {
+        heading = event.webkitCompassHeading; //iOS non-standard
+    }
+
+    var orientation = getBrowserOrientation();
+
+    if (typeof heading !== "undefined" && heading !== null) { // && typeof orientation !== "undefined") {
+        // we have a browser that reports device heading and orientation
+
+        // what adjustment we have to add to rotation to allow for current device orientation
+        var adjustment = 0;
+        if (defaultOrientation === "landscape") {
+            adjustment -= 90;
+        }
+
+        if (typeof orientation !== "undefined") {
+            var currentOrientation = orientation.split("-");
+
+            if (defaultOrientation !== currentOrientation[0])
+            {
+                if (defaultOrientation === "landscape")
+                {
+                    adjustment -= 270;
+                }
+                else
+                {
+                    adjustment -= 90;
+                }
+            }
+
+            if (currentOrientation[1] === "secondary")
+            {
+                adjustment -= 180;
+            }
+        }
+
+        positionCurrent.hng = heading + adjustment;
+
+        var phase = positionCurrent.hng < 0 ? 360 + positionCurrent.hng : positionCurrent.hng;
+        positionHng.textContent = (360 - phase | 0) + "°";
+
+        console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
+
+        $('.orientation').html(positionCurrent.hng)
+        /*
+        // apply rotation to compass rose
+        if (typeof rose.style.transform !== "undefined") {
+            rose.style.transform = "rotateZ(" + positionCurrent.hng + "deg)";
+        } else if (typeof rose.style.webkitTransform !== "undefined") {
+            rose.style.webkitTransform = "rotateZ(" + positionCurrent.hng + "deg)";
+        }
+        */
+    }
+    else
+    {
+        // device can't show heading
+
+        positionHng  = "n/a";
+        alert('error');
+    }
+}
+
 if (window.DeviceOrientationEvent) {
 
+
+    if (screen.width > screen.height)
+    {
+        defaultOrientation = "landscape";
+    }
+    else
+    {
+        defaultOrientation = "portrait";
+    }
+
+
+    window.addEventListener("deviceorientation", onHeadingChange);
+    /*
     window.addEventListener("deviceorientation", function(event)
     {
 
@@ -23,13 +146,15 @@ if (window.DeviceOrientationEvent) {
 
         $('.orientation').html('xValue :'+xValue + '<br>yValue :'+yValue+ '<br>rotation :'+rotation)
 
-    }, true);
+    }, true)
+    */
 
 
 
 } else {
     alert("Sorry, your browser doesn't support Device Orientation");
 }
+
 
 MAP_WIDTH           = 1000000;
 MAP_HEIGHT          = 1000000;
@@ -40,6 +165,8 @@ function convert(lat, lon){
     var x = (lon + 180) * (MAP_WIDTH / 360);
     return {x:x,y:y};
 }
+
+
 
 window.onload = function()
 {
@@ -246,7 +373,7 @@ window.onload = function()
             box.setAttribute("rotation"	, "0 45 0");
             box.setAttribute("show-info", JSON.stringify(stores[s]));
             box.setAttribute("color"    , "#123123");
-            box.setAttribute("look-at"	, "[camera]");
+            //box.setAttribute("look-at"	, "[camera]");
 
             console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
 
@@ -263,8 +390,8 @@ function calculateDistance(lat1, lon1, lat2, lon2)
     var dLat = (lat2 - lat1).toRad();
     var dLon = (lon2 - lon1).toRad();
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
     return d;
