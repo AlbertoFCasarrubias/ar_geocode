@@ -105,14 +105,14 @@ function onHeadingChange(event) {
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
 
-        /*
+
         if(worldAdjustRotation==null != worldAdjustRotation !=0)
         {
             worldAdjustRotation = positionCurrent.hng;
             $('#pointers').attr('rotation','0 '+positionCurrent.hng+' 0');
             alert('Ajuste: '+parseInt(positionCurrent.hng));
         }
-        */
+
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
