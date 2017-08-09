@@ -117,7 +117,7 @@ function onHeadingChange(event) {
         $('#pointers').attr('rotation','0 113 0');
 
 
-        $('.brujula').html((360 - phase | 0)+ "°")
+        $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
         /*
         // apply rotation to compass rose
