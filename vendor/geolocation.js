@@ -113,7 +113,8 @@ function onHeadingChange(event) {
             alert('Ajuste: '+parseInt(positionCurrent.hng));
         }
         */
-        $('#pointers').attr('rotation','0 65 0');
+
+        //$('#pointers').attr('rotation','0 65 0');
 
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
@@ -229,8 +230,8 @@ window.onload = function()
             }
         },
         {
-            lat: 19.2967949,
-            lng: -99.1061447,
+            lat: 19.2973321,
+            lng: -99.1065446,
             info:{
                 title: 'Walmart Pabellón Cuemanco',
                 horario: 'horario',
@@ -242,8 +243,8 @@ window.onload = function()
             }
         },
         {
-            lat: 19.2995844,
-            lng: -99.1070249,
+            lat: 19.2989663,
+            lng: -99.1059896,
             info:{
                 title: 'Bodega Aurrera Hueso',
                 horario: 'horario',
@@ -255,8 +256,8 @@ window.onload = function()
             }
         },
         {
-            lat: 19.2998148,
-            lng: -99.1137976,
+            lat: 19.2982219,
+            lng: -99.1143161,
             info:{
                 title: 'Audi Coapa',
                 horario: 'horario',
@@ -268,8 +269,8 @@ window.onload = function()
             }
         },
         {
-            lat: 19.2996258,
-            lng: -99.1115139,
+            lat: 19.2988171,
+            lng: -99.1117088,
             info:{
                 title: 'Biker Coapa',
                 horario: 'horario',
@@ -281,8 +282,8 @@ window.onload = function()
             }
         },
         {
-            lat:19.299052,
-            lng: -99.1116174,
+            lat:19.2969037,
+            lng: -99.1119386,
             info:{
                 title: 'IIM',
                 horario: 'horario',
@@ -404,7 +405,7 @@ window.onload = function()
 
     function generatePin(startPos)
     {
-        var offset  = 1000;
+        var offset  = 10000;
         var scene   = document.getElementById('pointers');
 
         for(var s in stores)
@@ -425,14 +426,23 @@ window.onload = function()
                 y: (startPos.coords.longitude    - stores[s].lng)*offset
             }
 
+            var color = '#123123';
+            if(stores[s].info.title == 'IIM')
+            {
+                color = '#ff0000';
+            }
 
+            if(stores[s].info.title == 'Audi Coapa')
+            {
+                color = '#00ff00';
+            }
 
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
             box.setAttribute("rotation"	, "0 45 0");
             box.setAttribute("show-info", JSON.stringify(stores[s]));
-            box.setAttribute("color"    , "#123123");
+            box.setAttribute("color"    , color);
             //box.setAttribute("look-at"	, "[camera]");
 
             console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
