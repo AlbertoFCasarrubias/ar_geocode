@@ -64,7 +64,10 @@ function onHeadingChange(event) {
 
     var orientation = getBrowserOrientation();
 
-    if (typeof heading !== "undefined" && heading !== null) { // && typeof orientation !== "undefined") {
+    alert(heading);
+    if (typeof heading !== "undefined" && heading !== null)
+    {
+        // && typeof orientation !== "undefined") {
         // we have a browser that reports device heading and orientation
 
         // what adjustment we have to add to rotation to allow for current device orientation
