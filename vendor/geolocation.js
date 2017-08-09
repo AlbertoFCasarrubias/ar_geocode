@@ -12,6 +12,7 @@ else
 
 
 // our current position
+var worldAdjustRotation = null;
 var positionHng;
 var defaultOrientation;
 var positionCurrent = {
@@ -103,6 +104,12 @@ function onHeadingChange(event) {
 
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
+
+        if(worldAdjustRotation==null)
+        {
+            $('#pointers').attr('rotation','0 '+positionCurrent.hng+' 0');
+            alert('Ajuste: '+parseInt(positionCurrent.hng));
+        }
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
