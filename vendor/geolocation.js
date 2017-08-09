@@ -164,7 +164,12 @@ window.onload = function()
                 $('.stores').append('<p>Distance to '+stores[s].info.title+':<br/> <span id="distance">'+calculateDistance(stores[s].lat, stores[s].lng,position.coords.latitude, position.coords.longitude)+'</span> m </p>')
             }
 
-            //$('.txt.dist').html(this.calculateDistance(store.lat, store.lng,position.coords.latitude, position.coords.longitude)+'m');
+            if(store_current!=null)
+            {
+                $('.txt.dist').html(this.calculateDistance(store_current.lat, store_current.lng,position.coords.latitude, position.coords.longitude)+'m');
+            }
+
+
 
 
         });
