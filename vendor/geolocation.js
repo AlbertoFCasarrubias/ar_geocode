@@ -105,12 +105,14 @@ function onHeadingChange(event) {
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
 
-        if(worldAdjustRotation==null)
+        /*
+        if(worldAdjustRotation==null != worldAdjustRotation !=0)
         {
             worldAdjustRotation = positionCurrent.hng;
             $('#pointers').attr('rotation','0 '+positionCurrent.hng+' 0');
             alert('Ajuste: '+parseInt(positionCurrent.hng));
         }
+        */
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
@@ -311,6 +313,10 @@ window.onload = function()
 
 
 
+
+
+
+
     navigator.geolocation.getCurrentPosition(
         function(position)
         {
@@ -396,7 +402,8 @@ window.onload = function()
 
     function generatePin(startPos)
     {
-        var offset = 10000;
+        var offset  = 10000;
+        var scene   = document.getElementById('pointers');
 
         for(var s in stores)
         {
@@ -417,7 +424,7 @@ window.onload = function()
             }
 
 
-            var scene = document.getElementById('pointers');
+
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
@@ -431,6 +438,13 @@ window.onload = function()
             scene.appendChild(box);
         }
 
+        var cylinder	= document.createElement('a-cylinder');
+        cylinder.setAttribute("position"    , '0 0 -10');
+        cylinder.setAttribute("radius"	    , "0.5");
+        cylinder.setAttribute("height"      , "1.5");
+        cylinder.setAttribute("color"       , "#ff0000");
+
+        scene.appendChild(cylinder);
     }
 };
 
