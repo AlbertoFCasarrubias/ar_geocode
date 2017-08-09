@@ -64,7 +64,6 @@ function onHeadingChange(event) {
 
     var orientation = getBrowserOrientation();
 
-    alert(heading);
     if (typeof heading !== "undefined" && heading !== null)
     {
         // && typeof orientation !== "undefined") {
@@ -100,9 +99,10 @@ function onHeadingChange(event) {
         positionCurrent.hng = heading + adjustment;
 
         var phase = positionCurrent.hng < 0 ? 360 + positionCurrent.hng : positionCurrent.hng;
-        positionHng.textContent = (360 - phase | 0) + "°";
+        //positionHng.textContent = (360 - phase | 0) + "°";
 
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
+        console.log( (360 - phase | 0) + "°");
 
         $('.orientation').html(positionCurrent.hng)
         /*
