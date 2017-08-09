@@ -107,6 +107,7 @@ function onHeadingChange(event) {
 
         if(worldAdjustRotation==null)
         {
+            worldAdjustRotation = positionCurrent.hng;
             $('#pointers').attr('rotation','0 '+positionCurrent.hng+' 0');
             alert('Ajuste: '+parseInt(positionCurrent.hng));
         }
