@@ -10,17 +10,16 @@ else
 }
 
 
-var xValue      = null;
 if (window.DeviceOrientationEvent) {
 
     window.addEventListener("deviceorientation", function(event)
     {
 
-        xValue          = Math.round(event.gamma);
+        var xValue      = Math.round(event.gamma);
         var yValue      = Math.round(event.beta);
         var rotation    = Math.round(event.alpha);
 
-        $('#cameraControl').attr('rotation' , xValue+' 0 0');
+        $('#cameraControl').attr('rotation' , '0 '+yValue+' 0');
 
         $('.orientation').html('xValue :'+xValue + '<br>yValue :'+yValue+ '<br>rotation :'+rotation)
 
