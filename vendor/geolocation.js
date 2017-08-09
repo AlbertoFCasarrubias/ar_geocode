@@ -114,7 +114,7 @@ function onHeadingChange(event) {
         }
         */
 
-        //$('#pointers').attr('rotation','0 65 0');
+        $('#pointers').attr('rotation','0 113 0');
 
 
         $('.brujula').html((360 - phase | 0)+ "°")
