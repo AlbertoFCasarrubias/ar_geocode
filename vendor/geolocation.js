@@ -9,14 +9,18 @@ else
     alert('Geolocation is not supported for this Browser/OS version yet.');
 }
 
+
+var xValue      = null;
 if (window.DeviceOrientationEvent) {
 
     window.addEventListener("deviceorientation", function(event)
     {
 
-        var xValue      = Math.round(event.gamma);
+        xValue          = Math.round(event.gamma);
         var yValue      = Math.round(event.beta);
         var rotation    = Math.round(event.alpha);
+
+        $('#camera').attr('rotation' , xvalue+' 0 0');
 
         $('.orientation').html('xValue :'+xValue + '<br>yValue :'+yValue+ '<br>rotation :'+rotation)
 
