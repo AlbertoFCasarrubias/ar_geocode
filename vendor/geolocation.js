@@ -26,17 +26,67 @@ window.onload = function()
         {
             lat: 19.4375921,
             lng: -99.2099433,
-            title: 'Superama Los Morales'
+            info:{
+                title: 'Superama Los Morales',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'superama'
+            }
         },
         {
             lat: 19.4477107,
             lng: -99.2171927,
-            title: 'Sam\'s Club Toreo'
+            info:{
+                title: 'Sam\'s Club Toreo',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'sams'
+            }
         },
         {
             lat: 19.4373714,
             lng: -99.2056145,
-            title: 'Superama Polanco'
+            info:{
+                title: 'Superama Polanco',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'superama'
+            }
+        },
+        {
+            lat: 19.2967949,
+            lng: -99.1061447,
+            info:{
+                title: 'Walmart Pabellon Cuemanco',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'supercenter'
+            }
+        },
+        {
+            lat: 19.2993366,
+            lng: -99.1115037,
+            info:{
+                title: 'Casa',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'supercenter'
+            }
         },
 
     ];
@@ -66,6 +116,7 @@ window.onload = function()
             }
 
             $('#sams').attr('position',difSams.x+' 0.5 '+difSams.y);
+            $('#sams').attr('show-info', JSON.stringify(stores[1].info));
 
             var convSup    = convert(stores[2].lat,stores[2].lng);
             var difSup     =
@@ -104,11 +155,15 @@ window.onload = function()
             document.getElementById('currentLat').innerHTML = position.coords.latitude;
             document.getElementById('currentLon').innerHTML = position.coords.longitude;
 
+            $('.stores').html('');
+            for(var s in stores)
+            {
+                $('.stores').append('<p>Distance to '+stores[s].info.title+':<br/> <span id="distance">'+calculateDistance(stores[s].lat, stores[s].lng,position.coords.latitude, position.coords.longitude)+'</span> m </p>')
+            }
 
-
-            document.getElementById('distance').innerHTML           = calculateDistance(stores[0].lat, stores[0].lng,position.coords.latitude, position.coords.longitude);
-            document.getElementById('distanceSams').innerHTML       = calculateDistance(stores[1].lat, stores[1].lng,position.coords.latitude, position.coords.longitude);
-            document.getElementById('distanceSuperama').innerHTML   = calculateDistance(stores[2].lat, stores[2].lng,position.coords.latitude, position.coords.longitude);
+            //document.getElementById('distance').innerHTML           = calculateDistance(stores[0].lat, stores[0].lng,position.coords.latitude, position.coords.longitude);
+            //document.getElementById('distanceSams').innerHTML       = calculateDistance(stores[1].lat, stores[1].lng,position.coords.latitude, position.coords.longitude);
+            //document.getElementById('distanceSuperama').innerHTML   = calculateDistance(stores[2].lat, stores[2].lng,position.coords.latitude, position.coords.longitude);
         });
 };
 

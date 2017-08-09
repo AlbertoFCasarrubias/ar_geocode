@@ -1,49 +1,58 @@
 <html>
 <head>
-    <script src="vendor/proj4.js"></script>
     <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <script src="vendor/geolocation.js"></script>
+    <script src="vendor/aframe-showInfo.js"></script>
 </head>
 <body>
 <div id="tripmeter" style="position: absolute; z-index:9; width: 100%; height: auto;">
     <p>
         Starting Location (lat, lon):<br/>
-        <span id="startLat">???</span>°, <span id="startLon">???</span>°
+        <span id="startLat">???</span>, <span id="startLon">???</span>
     </p>
     <p>
         Current Location (lat, lon):<br/>
-        <span id="currentLat">???</span>°, <span id="currentLon">???</span>°
+        <span id="currentLat">???</span>, <span id="currentLon">???</span>
     </p>
-    <p>
-        Distance to Superama Los Morales:<br/>
-        <span id="distance">0</span> m
-
-    </p>
-    <p>
-        Distance to Sam's Club Toreo:<br/>
-        <span id="distanceSams">0</span> m
-    </p>
-    <p>
-        Distance to Superma Polanco:<br/>
-        <span id="distanceSuperama">0</span> m
-    </p>
+    <div class="stores"></div>
 </div>
 <a-scene>
     <a-assets>
+        <img id="img_ba" src="img/ba.png">
+        <img id="img_sams" src="img/sams.png">
+        <img id="img_superama" src="img/superama.png">
+        <img id="img_walmart" src="img/walmart.png">
         <a-asset-item id="superama-obj" src="obj/spark.obj"></a-asset-item>
         <a-asset-item id="superama-mtl" src="obj/spark.mtl"></a-asset-item>
     </a-assets>
-    <a-entity id="superama" obj-model="obj: #superama-obj; mtl: #superama-mtl" rotation="0 90 0" position="3 0 -3" scale=".05 .05 .05" >
-        <a-animation attribute="rotation"
-                     dur="5000"
-                     fill="forwards"
-                     to="0 360 0"
-                     repeat="indefinite"></a-animation>
+    <a-entity id="superama" obj-model="obj: #superama-obj; mtl: #superama-mtl" position="3 0 -3" scale=".05 .05 .05" look-at="[camera]" show-info=""></a-entity>
+    <a-entity id="camera" camera look-controls wasd-controls>
+        <a-entity position="0 0 -3"
+                  geometry="primitive: ring; radiusOuter: 0.30;
+                          radiusInner: 0.20;"
+                  material="color: cyan; shader: flat"
+                  cursor="maxDistance: 30; fuse: true">
+            <a-animation begin="click" easing="ease-in" attribute="scale"
+                         fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+                         fill="backwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+        </a-entity>
+        <!--a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          fuse="true"
+          raycaster="objects: .link"></a-cursor-->
     </a-entity>
     <!--a-box id="superama" position="-3.13749999 0.5 -5.0527777" rotation="0 45 0" color="#4CC3D9"></a-box-->
-    <a-sphere id="sams" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-    <a-cylinder id="supPol" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+    <a-sphere id="sams" position="0 1.25 -5" radius="1.25" color="#EF2D5E" show-info="">
+        <!--a-animation begin="click" attribute="position" to="5 5 5"
+                     easing="linear" dur="2000" fill="backwards"></a-animation-->
+    </a-sphere>
+    <a-cylinder id="supPol" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" show-info=""></a-cylinder>
     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
     <a-sky color="#ECECEC"></a-sky>
 </a-scene>
