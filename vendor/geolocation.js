@@ -173,8 +173,8 @@ if (window.DeviceOrientationEvent) {
 }
 
 
-MAP_WIDTH           = 1000000;
-MAP_HEIGHT          = 1000000;
+MAP_WIDTH           = 100000;
+MAP_HEIGHT          = 100000;
 var store_current   = null;
 
 function convert(lat, lon){
@@ -260,19 +260,6 @@ window.onload = function()
             lng: -99.1143161,
             info:{
                 title: 'Audi Coapa',
-                horario: 'horario',
-                promo: 'promo',
-                info: 'info',
-                desc: 'desc',
-                dist: 'dist',
-                type: 'ba'
-            }
-        },
-        {
-            lat: 19.2988171,
-            lng: -99.1117088,
-            info:{
-                title: 'Biker Coapa',
                 horario: 'horario',
                 promo: 'promo',
                 info: 'info',
@@ -425,6 +412,7 @@ window.onload = function()
                 x: (startPos.coords.latitude     - stores[s].lat)*offset,
                 y: (startPos.coords.longitude    - stores[s].lng)*offset
             }
+            console.log(difCoordenads)
 
             var color = '#123123';
             if(stores[s].info.title == 'IIM')
