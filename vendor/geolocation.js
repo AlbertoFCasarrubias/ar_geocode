@@ -19,7 +19,7 @@ if (window.DeviceOrientationEvent) {
         var yValue      = Math.round(event.beta);
         var rotation    = Math.round(event.alpha);
 
-        $('#cameraControl').attr('rotation' , '0 '+yValue+' 0');
+        $('#cameraControl').attr('rotation' , '0 '+xValue+' 0');
 
         $('.orientation').html('xValue :'+xValue + '<br>yValue :'+yValue+ '<br>rotation :'+rotation)
 
