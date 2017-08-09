@@ -104,7 +104,7 @@ function onHeadingChange(event) {
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
 
-        $('.brujula').html(positionCurrent.hng+ "°")
+        $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
         /*
         // apply rotation to compass rose
@@ -120,7 +120,7 @@ function onHeadingChange(event) {
         // device can't show heading
 
         positionHng  = "n/a";
-        alert('error');
+        console.log('brujula no disponible');
     }
 }
 
@@ -234,6 +234,45 @@ window.onload = function()
             lng: -99.1070249,
             info:{
                 title: 'Bodega Aurrera Hueso',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'ba'
+            }
+        },
+        {
+            lat: 19.2998148,
+            lng: -99.1137976,
+            info:{
+                title: 'Audi Coapa',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'ba'
+            }
+        },
+        {
+            lat: 19.2996258,
+            lng: -99.1115139,
+            info:{
+                title: 'Biker Coapa',
+                horario: 'horario',
+                promo: 'promo',
+                info: 'info',
+                desc: 'desc',
+                dist: 'dist',
+                type: 'ba'
+            }
+        },
+        {
+            lat:19.299052,
+            lng: -99.1116174,
+            info:{
+                title: 'IIM',
                 horario: 'horario',
                 promo: 'promo',
                 info: 'info',
@@ -370,7 +409,7 @@ window.onload = function()
             }
 
 
-            var scene = document.querySelector('a-scene');
+            var scene = document.getElementById('pointers');
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
