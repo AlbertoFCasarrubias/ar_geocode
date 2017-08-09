@@ -9,8 +9,9 @@ else
     alert('Geolocation is not supported for this Browser/OS version yet.');
 }
 
-MAP_WIDTH   = 1000000;
-MAP_HEIGHT  = 1000000;
+MAP_WIDTH           = 1000000;
+MAP_HEIGHT          = 1000000;
+var store_current   = null;
 
 function convert(lat, lon){
     var y = ((-1 * lat) + 90) * (MAP_HEIGHT / 180);
@@ -66,7 +67,7 @@ window.onload = function()
             lat: 19.2967949,
             lng: -99.1061447,
             info:{
-                title: 'Walmart Pabellon Cuemanco',
+                title: 'Walmart Pabellón Cuemanco',
                 horario: 'horario',
                 promo: 'promo',
                 info: 'info',
@@ -76,16 +77,16 @@ window.onload = function()
             }
         },
         {
-            lat: 19.2993366,
-            lng: -99.1115037,
+            lat: 19.2995844,
+            lng: -99.1070249,
             info:{
-                title: 'Casa',
+                title: 'Bodega Aurrera Hueso',
                 horario: 'horario',
                 promo: 'promo',
                 info: 'info',
                 desc: 'desc',
                 dist: 'dist',
-                type: 'supercenter'
+                type: 'ba'
             }
         },
 
@@ -153,6 +154,7 @@ window.onload = function()
     navigator.geolocation.watchPosition(
         function(position)
         {
+            console.log('store_current ',store_current);
             document.getElementById('currentLat').innerHTML = position.coords.latitude;
             document.getElementById('currentLon').innerHTML = position.coords.longitude;
 
@@ -162,9 +164,9 @@ window.onload = function()
                 $('.stores').append('<p>Distance to '+stores[s].info.title+':<br/> <span id="distance">'+calculateDistance(stores[s].lat, stores[s].lng,position.coords.latitude, position.coords.longitude)+'</span> m </p>')
             }
 
-            //document.getElementById('distance').innerHTML           = calculateDistance(stores[0].lat, stores[0].lng,position.coords.latitude, position.coords.longitude);
-            //document.getElementById('distanceSams').innerHTML       = calculateDistance(stores[1].lat, stores[1].lng,position.coords.latitude, position.coords.longitude);
-            //document.getElementById('distanceSuperama').innerHTML   = calculateDistance(stores[2].lat, stores[2].lng,position.coords.latitude, position.coords.longitude);
+            //$('.txt.dist').html(this.calculateDistance(store.lat, store.lng,position.coords.latitude, position.coords.longitude)+'m');
+
+
         });
 
     function generatePin(startPos)
@@ -183,8 +185,9 @@ window.onload = function()
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
-            box.setAttribute("rotatios"	, "0 45 0");
-            box.setAttribute("color",     "#123123");
+            box.setAttribute("rotation"	, "0 45 0");
+            box.setAttribute("show-info", JSON.stringify(stores[s]));
+            box.setAttribute("color"    , "#123123");
             box.setAttribute("look-at"	, "[camera]");
 
             console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
