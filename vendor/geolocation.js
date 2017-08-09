@@ -135,6 +135,7 @@ window.onload = function()
             $('#sams').attr('position',difCoordenads.x+' 0.5 '+difCoordenads.y);
             console.log(dif,difCoordenads)
 
+            generatePin(startPos)
 
 
 
@@ -165,12 +166,39 @@ window.onload = function()
             //document.getElementById('distanceSams').innerHTML       = calculateDistance(stores[1].lat, stores[1].lng,position.coords.latitude, position.coords.longitude);
             //document.getElementById('distanceSuperama').innerHTML   = calculateDistance(stores[2].lat, stores[2].lng,position.coords.latitude, position.coords.longitude);
         });
+
+    function generatePin(startPos)
+    {
+        var offset = 10000;
+
+        for(var s in stores)
+        {
+
+            var difCoordenads = {
+                x: (startPos.coords.latitude     - stores[s].lat)*offset,
+                y: (startPos.coords.longitude    - stores[s].lng)*offset
+            }
+
+            var scene = document.querySelector('a-scene');
+
+            var box	= document.createElement('a-box');
+            box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
+            box.setAttribute("rotatios"	, "0 45 0");
+            box.setAttribute("color",     "#123123");
+            box.setAttribute("look-at"	, "[camera]");
+
+            console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
+
+            scene.appendChild(box);
+        }
+
+    }
 };
 
 
 function calculateDistance(lat1, lon1, lat2, lon2)
 {
-    var R = 6371 * 1000; // km
+    var R = 6371 * 1000; // m
     var dLat = (lat2 - lat1).toRad();
     var dLon = (lon2 - lon1).toRad();
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
