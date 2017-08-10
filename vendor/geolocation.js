@@ -114,7 +114,14 @@ function onHeadingChange(event) {
         }
         */
 
-        $('#pointers').attr('rotation','0 90 0');
+        var ajusteRot = 0;
+        if(positionCurrent.hng > 180)
+        {
+            ajusteRot = 360 - positionCurrent.hng;
+        }
+
+        $('#pointers').attr('rotation','0 '+ajusteRot+' 0');
+
 
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
@@ -438,6 +445,7 @@ window.onload = function()
             scene.appendChild(box);
         }
 
+        /*
         var cylinder	= document.createElement('a-cylinder');
         cylinder.setAttribute("position"    , '0 0 -10');
         cylinder.setAttribute("radius"	    , "0.5");
@@ -445,6 +453,7 @@ window.onload = function()
         cylinder.setAttribute("color"       , "#ff0000");
 
         scene.appendChild(cylinder);
+        */
     }
 };
 
