@@ -117,11 +117,6 @@ function onHeadingChange(event) {
         var ajusteRot = 90 - positionCurrent.hng;
         $('.orientation').html('<p>ajuster Rot: '+ajusteRot+' </p>')
 
-
-
-
-
-
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
         /*
