@@ -448,13 +448,31 @@ window.onload = function()
         }
 
 
-        var cylinder	= document.createElement('a-cylinder');
-        cylinder.setAttribute("position"    , '-10 0 0');
-        cylinder.setAttribute("radius"	    , "0.5");
-        cylinder.setAttribute("height"      , "1.5");
-        cylinder.setAttribute("color"       , "#ff0000");
+        var norte	= document.createElement('a-entity');
+        norte.setAttribute("position"   , '-10 0 0');
+        norte.setAttribute("text"       , 'width:10; color:black; value:Norte; align:center;');
+        norte.setAttribute("look-at"	, "[camera]");
+        scene.appendChild(norte);
 
-        scene.appendChild(cylinder);
+        var sur	= document.createElement('a-entity');
+        sur.setAttribute("position"     , '10 0 0');
+        sur.setAttribute("text"         , 'width:10; color:black; value:Sur; align:center;');
+        sur.setAttribute("look-at"	    , "[camera]");
+        scene.appendChild(sur);
+
+        var este	= document.createElement('a-entity');
+        este.setAttribute("position"     , '0 0 -10');
+        este.setAttribute("text"         , 'width:10; color:black; value:Este; align:center;');
+        este.setAttribute("look-at"	    , "[camera]");
+        scene.appendChild(este);
+
+        var oeste	= document.createElement('a-entity');
+        oeste.setAttribute("position"     , '0 0 10');
+        oeste.setAttribute("text"         , 'width:10; color:black; value:Oeste; align:center;');
+        oeste.setAttribute("look-at"	  , "[camera]");
+        scene.appendChild(oeste);
+
+
 
     }
 };
