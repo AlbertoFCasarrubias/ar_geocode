@@ -116,6 +116,7 @@ function onHeadingChange(event) {
 
         var ajusteRot = 90 - positionCurrent.hng;
         $('.orientation').html('<p>ajuster Rot: '+ajusteRot+' </p>')
+        $('#pointers').attr('rotation','0 '+ajusteRot+' 0');
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
@@ -306,7 +307,7 @@ window.onload = function()
     $('#pointers').attr('rotation','0 -90 0');
 
     //ajuste por la posicion inicial del teléfono con respecto al norte
-    $('#pointers').attr('rotation','0 146 0');
+    //$('#pointers').attr('rotation','0 146 0');
 
 
 
