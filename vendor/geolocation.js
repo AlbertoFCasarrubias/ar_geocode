@@ -311,8 +311,11 @@ window.onload = function()
     });
 
 
+    //ajuste inical mundo, mandar el norte arriba
+    $('#pointers').attr('rotation','0 -90 0');
 
-
+    //ajuste por la posicion inicial del teléfono con respecto al norte
+    $('#pointers').attr('rotation','0 146 0');
 
 
 
@@ -322,6 +325,9 @@ window.onload = function()
             startPos = position;
             document.getElementById('startLat').innerHTML = startPos.coords.latitude;
             document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+
+            //console.log('startPos ', startPos);
+            //console.log('camera '  , $('#camera').attr('position'));
 
             var convStart   = convert(startPos.coords.latitude,startPos.coords.longitude);
             var conv        = convert(stores[0].lat,stores[0].lng);
@@ -358,7 +364,7 @@ window.onload = function()
             }
 
             $('#sams').attr('position',difCoordenads.x+' 0.5 '+difCoordenads.y);
-            console.log(dif,difCoordenads)
+            //console.log(dif,difCoordenads)
 
             generatePin(startPos)
 
@@ -421,7 +427,7 @@ window.onload = function()
                 x: (startPos.coords.latitude     - stores[s].lat)*offset,
                 y: (startPos.coords.longitude    - stores[s].lng)*offset
             }
-            console.log(difCoordenads)
+            //console.log(difCoordenads)
 
             var color = '#123123';
             if(stores[s].info.title == 'IIM')
@@ -434,9 +440,12 @@ window.onload = function()
                 color = '#00ff00';
             }
 
+            console.log('X:', startPos.coords.latitude, stores[s].lat , difCoordenads.x , stores[s].info.title);
+            console.log(' ');
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
+            //box.setAttribute("position"	, difCoordenads.x+' 0.5 0');
             box.setAttribute("rotation"	, "0 45 0");
             box.setAttribute("show-info", JSON.stringify(stores[s]));
             box.setAttribute("color"    , color);
@@ -447,15 +456,15 @@ window.onload = function()
             scene.appendChild(box);
         }
 
-        /*
+
         var cylinder	= document.createElement('a-cylinder');
-        cylinder.setAttribute("position"    , '0 0 -10');
+        cylinder.setAttribute("position"    , '-10 0 0');
         cylinder.setAttribute("radius"	    , "0.5");
         cylinder.setAttribute("height"      , "1.5");
         cylinder.setAttribute("color"       , "#ff0000");
 
         scene.appendChild(cylinder);
-        */
+
     }
 };
 
