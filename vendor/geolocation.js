@@ -118,6 +118,7 @@ function onHeadingChange(event) {
         if(positionCurrent.hng > 180)
         {
             ajusteRot = 360 - positionCurrent.hng;
+            $('.stores').append('<p>ajuster rot: '+ajusteRot+' </p>')
         }
 
         $('#pointers').attr('rotation','0 '+ajusteRot+' 0');
