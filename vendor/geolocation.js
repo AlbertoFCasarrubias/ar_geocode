@@ -114,8 +114,14 @@ function onHeadingChange(event) {
         }
         */
 
-        var ajusteRot = 90 - positionCurrent.hng;
-        $('.orientation').html('<p>ajuster Rot: '+ajusteRot+' </p>')
+        var ajusteRot = null;
+
+        if(ajusteRot == null)
+        {
+            ajusteRot = 90 - positionCurrent.hng;
+            $('.orientation').html('<p>ajuster Rot: '+ajusteRot+' </p>')
+        }
+
         //$('#pointers').attr('rotation','0 '+ajusteRot+' 0');
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
