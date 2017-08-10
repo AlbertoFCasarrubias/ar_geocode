@@ -114,13 +114,9 @@ function onHeadingChange(event) {
         }
         */
 
-        var ajusteRot = 0;
-        if(positionCurrent.hng > 180)
-        {
-            ajusteRot = 360 - positionCurrent.hng;
-            $('.stores').append('<p>ajuster Rot: '+ajusteRot+' </p>')
-            $('#pointers').attr('rotation','0 '+ajusteRot+' 0');
-        }
+        var ajusteRot = 90 - positionCurrent.hng;
+        $('.orientation').html('<p>ajuster Rot: '+ajusteRot+' </p>')
+
 
 
 
