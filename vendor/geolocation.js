@@ -119,7 +119,7 @@ function onHeadingChange(event) {
         if(ajusteRot == null)
         {
             ajusteRot = 90 - positionCurrent.hng;
-            $('.orientation').html('<p>ajuster Rot: '+ajusteRot+' </p>')
+            $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
         }
 
         //$('#pointers').attr('rotation','0 '+ajusteRot+' 0');
