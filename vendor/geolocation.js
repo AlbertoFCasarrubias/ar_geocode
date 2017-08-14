@@ -25,7 +25,7 @@ var positionCurrent = {
 function adjustRotationScene()
 {
 
-    if(ajusteRot == null && positionCurrent.hng!=null)
+    if(ajusteRot == null && positionCurrent.hng != null && positionCurrent.hng != 0)
     {
         console.log('adjustRotationScene');
         console.log('ajusteRot '+ajusteRot);
