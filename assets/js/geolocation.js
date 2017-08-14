@@ -524,7 +524,7 @@ var Geolocation = new function()
 
 
 
-            $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
+            $('.brujula').html(parseFloat(Geolocation.positionCurrent.hng).toFixed(2)+ "°")
 
             /*
              // apply rotation to compass rose
