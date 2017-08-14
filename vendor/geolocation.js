@@ -418,8 +418,8 @@ window.onload = function()
                 color = '#00ff00';
             }
 
-            console.log('X:', startPos.coords.latitude, stores[s].lat , difCoordenads.x , stores[s].info.title);
-            console.log(' ');
+           // console.log('X:', startPos.coords.latitude, stores[s].lat , difCoordenads.x , stores[s].info.title);
+            //console.log(' ');
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
@@ -429,7 +429,7 @@ window.onload = function()
             box.setAttribute("color"    , color);
             //box.setAttribute("look-at"	, "[camera]");
 
-            console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
+            //console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
 
             scene.appendChild(box);
         }
