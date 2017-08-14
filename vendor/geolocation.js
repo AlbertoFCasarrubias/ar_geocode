@@ -294,6 +294,9 @@ window.onload = function()
             document.getElementById('startLat').innerHTML = startPos.coords.latitude;
             document.getElementById('startLon').innerHTML = startPos.coords.longitude;
 
+            console.log('get current position');
+            console.log('ajusteRot '+ajusteRot);
+            console.log('positionCurrent '+positionCurrent);
             if(ajusteRot == null )
             {
                 ajusteRot = 90 - positionCurrent.hng;
