@@ -107,12 +107,7 @@ function onHeadingChange(event) {
         //console.log( (360 - phase | 0) + "°");
 
 
-        if(ajusteRot == null && positionCurrent.hng!=0)
-        {
-            ajusteRot = 90 - positionCurrent.hng;
-            console.log('Ajuste: '+ajusteRot);
-            $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
-        }
+
 
         //$('#pointers').attr('rotation','0 '+ajusteRot+' 0');
 
@@ -148,24 +143,7 @@ if (window.DeviceOrientationEvent) {
         defaultOrientation = "portrait";
     }
 
-
     window.addEventListener("deviceorientation", onHeadingChange);
-    /*
-    window.addEventListener("deviceorientation", function(event)
-    {
-
-        var xValue      = Math.round(event.gamma);
-        var yValue      = Math.round(event.beta);
-        var rotation    = Math.round(event.alpha);
-
-        //$('#cameraControl').attr('rotation' , '0 '+yValue+' 0');
-
-        $('.orientation').html('xValue :'+xValue + '<br>yValue :'+yValue+ '<br>rotation :'+rotation)
-
-    }, true)
-    */
-
-
 
 } else {
     alert("Sorry, your browser doesn't support Device Orientation");
@@ -315,6 +293,13 @@ window.onload = function()
             startPos = position;
             document.getElementById('startLat').innerHTML = startPos.coords.latitude;
             document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+
+            if(ajusteRot == null )
+            {
+                ajusteRot = 90 - positionCurrent.hng;
+                console.log('Ajuste rotación: '+ajusteRot);
+                $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
+            }
 
             //console.log('startPos ', startPos);
             //console.log('camera '  , $('#camera').attr('position'));
