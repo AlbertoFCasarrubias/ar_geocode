@@ -27,14 +27,14 @@ function adjustRotationScene()
 
     if(ajusteRot == null && positionCurrent.hng != null && positionCurrent.hng != 0)
     {
-        console.log('3. adjustRotationScene HNG negativo');
+        console.log('4. adjustRotationScene HNG negativo');
         console.log('ajusteRot '+ajusteRot);
         console.log('positionCurrent ',positionCurrent);
 
 
 
         //ajusteRot = (90 - positionCurrent.hng) * -1;
-        ajusteRot = positionCurrent.hng;
+        ajusteRot = positionCurrent.hng - 100 ;
         $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
         $('#pointers').attr('rotation','0 '+ajusteRot+' 0');
 
