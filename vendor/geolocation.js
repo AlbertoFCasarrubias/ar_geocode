@@ -119,7 +119,7 @@ function onHeadingChange(event) {
         var phase = positionCurrent.hng < 0 ? 360 + positionCurrent.hng : positionCurrent.hng;
         //positionHng.textContent = (360 - phase | 0) + "°";
 
-        //console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
+        console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         //console.log( (360 - phase | 0) + "°");
 
 
