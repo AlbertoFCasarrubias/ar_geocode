@@ -13,6 +13,7 @@ else
 
 // our current position
 var worldAdjustRotation = null;
+var ajusteRot = null;
 var positionHng;
 var defaultOrientation;
 var positionCurrent = {
@@ -105,8 +106,8 @@ function onHeadingChange(event) {
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
 
-        var ajusteRot = null;
-        if(ajusteRot == null)
+
+        if(ajusteRot == null && positionCurrent.hng!=0)
         {
             ajusteRot = 90 - positionCurrent.hng;
             alert('Ajuste: '+ajusteRot);
