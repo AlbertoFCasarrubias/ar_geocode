@@ -27,13 +27,14 @@ function adjustRotationScene()
 
     if(ajusteRot == null && positionCurrent.hng != null && positionCurrent.hng != 0)
     {
-        console.log('1. adjustRotationScene HNG negativo');
+        console.log('2. adjustRotationScene HNG negativo');
         console.log('ajusteRot '+ajusteRot);
         console.log('positionCurrent ',positionCurrent);
 
 
 
-        ajusteRot = (90 - positionCurrent.hng) * -1;
+        //ajusteRot = (90 - positionCurrent.hng) * -1;
+        ajusteRot = positionCurrent.hng;
         $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
 
         console.log('Ajuste rotación: '+ajusteRot);
@@ -153,6 +154,7 @@ function onHeadingChange(event) {
 
         positionHng  = "n/a";
         console.log('brujula no disponible');
+        $('#pointers').attr('rotation','0 -90 0');
     }
 }
 
@@ -172,7 +174,6 @@ if (window.DeviceOrientationEvent) {
 
 } else {
     console.log("Sorry, your browser doesn't support Device Orientation");
-    $('#pointers').attr('rotation','0 -90 0');
 }
 
 
