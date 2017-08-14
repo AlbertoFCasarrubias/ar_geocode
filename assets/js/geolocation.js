@@ -1,9 +1,4 @@
 
-
-
-
-
-
 var Geolocation = new function()
 {
     this.MAP_WIDTH  = 100000;
@@ -251,7 +246,7 @@ var Geolocation = new function()
 
         for(var s in this.stores)
         {
-
+            var img         = '';
             var convStart   = this.convert(startPos.coords.latitude,startPos.coords.longitude);
             var conv        = this.convert(this.stores[s].lat,this.stores[s].lng);
             var difCoordenads =
@@ -268,31 +263,78 @@ var Geolocation = new function()
             }
             //console.log(difCoordenads)
 
-            var color = '#123123';
-            if(this.stores[s].info.title == 'IIM')
+            switch(this.stores[s].info.type)
             {
-                color = '#ff0000';
+                case 'supercenter':
+                    img = 'walmart';
+                    break;
+
+                case 'ba':
+                    img = 'ba';
+                    break;
+
+                case 'sams':
+                    img = 'sams';
+                    break;
+
+                case 'superama':
+                    img = 'superama';
+                    break;
+
+                default:
+                    img = 'walmart';
+                    break;
             }
 
-            if(this.stores[s].info.title == 'Audi Coapa')
-            {
-                color = '#00ff00';
-            }
+            var object 	= document.createElement('a-plane');
+            object.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
+            object.setAttribute("src"		, "#pin");
+            object.setAttribute("material"  , "transparent: true;");
+            object.setAttribute("width"		, "2");
+            object.setAttribute("height"	, "2");
+            object.setAttribute("look-at"	, "[camera]");
+            object.setAttribute("show-info" , JSON.stringify(this.stores[s]));
 
-            // console.log('X:', startPos.coords.latitude, stores[s].lat , difCoordenads.x , stores[s].info.title);
-            //console.log(' ');
+            var logo 	= document.createElement('a-plane');
+            logo.setAttribute("position"	, '0 .2 1');
+            logo.setAttribute("src"		    , "#img_"+img);
+            logo.setAttribute("material"    , "transparent: true;");
+            logo.setAttribute("width"		, ".7");
+            logo.setAttribute("height"	    , ".7");
+            logo.setAttribute("look-at"	    , "[camera]");
+
+            /*
+            var animation 	= document.createElement("a-animation");
+            animation.setAttribute("id"			, "anim");
+            animation.setAttribute("attribute"	, "rotation");
+            animation.setAttribute("from"		, "0 -45 0");
+            animation.setAttribute("to"			, "0 45 0");
+            animation.setAttribute("dur"		, "3000");
+            animation.setAttribute("repeat"		, "indefinite");
+            animation.setAttribute("easing"		, "linear");
+            logo.appendChild(animation);
+            */
+            /*
+
+             <a-animation attribute="rotation"
+             dur="10000"
+             fill="forwards"
+             to="0 360 0"
+             repeat="indefinite"></a-animation>
 
             var box	= document.createElement('a-box');
             box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
-            //box.setAttribute("position"	, difCoordenads.x+' 0.5 0');
             box.setAttribute("rotation"	, "0 45 0");
-            box.setAttribute("show-info", JSON.stringify(this.stores[s]));
             box.setAttribute("color"    , color);
+            */
+
+            //box.setAttribute("show-info", JSON.stringify(this.stores[s]));
             //box.setAttribute("look-at"	, "[camera]");
 
             //console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
 
-            scene.appendChild(box);
+            object.appendChild(logo);
+            scene.appendChild(object);
         }
 
         var norte	= document.createElement('a-entity');

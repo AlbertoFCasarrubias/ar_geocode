@@ -38,6 +38,14 @@ AFRAME.registerComponent('show-info', {
                 img = '<img src="'+rutaimg+'ba.png">';
             break;
 
+            case 'superama':
+                img = '<img src="'+rutaimg+'superama.png">';
+            break;
+
+            case 'sams':
+                img = '<img src="'+rutaimg+'sams.png">';
+            break;
+
             default:
                 img = '<img src="'+rutaimg+'walmart.png">';
             break;
