@@ -3,11 +3,13 @@ var Geolocation = new function()
 {
     this.MAP_WIDTH  = 100000;
     this.MAP_HEIGHT = 100000;
+    this.maxDistance = 10000;
     this.startPos = null;
     this.store_current   = null;
     this.stores =
     [
             {
+                id:1,
                 lat: 19.4375921,
                 lng: -99.2099433,
                 info:{
@@ -21,6 +23,7 @@ var Geolocation = new function()
                 }
             },
             {
+                id:2,
                 lat: 19.4477107,
                 lng: -99.2171927,
                 info:{
@@ -34,6 +37,7 @@ var Geolocation = new function()
                 }
             },
             {
+                id:3,
                 lat: 19.4373714,
                 lng: -99.2056145,
                 info:{
@@ -47,6 +51,7 @@ var Geolocation = new function()
                 }
             },
             {
+                id:4,
                 lat: 19.2973321,
                 lng: -99.1065446,
                 info:{
@@ -60,6 +65,7 @@ var Geolocation = new function()
                 }
             },
             {
+                id:5,
                 lat: 19.2989663,
                 lng: -99.1059896,
                 info:{
@@ -73,6 +79,7 @@ var Geolocation = new function()
                 }
             },
             {
+                id:6,
                 lat: 19.2982219,
                 lng: -99.1143161,
                 info:{
@@ -86,6 +93,7 @@ var Geolocation = new function()
                 }
             },
             {
+                id:7,
                 lat:19.2969037,
                 lng: -99.1119386,
                 info:{
@@ -103,6 +111,7 @@ var Geolocation = new function()
     this.worldAdjustRotation = null;
     this.ajusteRot = null;
     this.positionHng;
+    this.filtro = '*'
     this.defaultOrientation;
     this.positionCurrent = {
         lat: null,
@@ -148,9 +157,9 @@ var Geolocation = new function()
             navigator.geolocation.getCurrentPosition(
                 function(position)
                 {
-                    this.startPos = position;
-                    document.getElementById('startLat').innerHTML = this.startPos.coords.latitude;
-                    document.getElementById('startLon').innerHTML = this.startPos.coords.longitude;
+                    Geolocation.startPos = position;
+                    document.getElementById('startLat').innerHTML = Geolocation.startPos.coords.latitude;
+                    document.getElementById('startLon').innerHTML = Geolocation.startPos.coords.longitude;
 
                     /*
 
@@ -196,7 +205,7 @@ var Geolocation = new function()
                     */
 
 
-                    Geolocation.generatePin(this.startPos)
+                    Geolocation.generatePin(Geolocation.startPos)
 
 
 
@@ -214,21 +223,25 @@ var Geolocation = new function()
             navigator.geolocation.watchPosition(
                 function(position)
                 {
-                    console.log('store_current ',this.store_current);
+                    console.log('store_current ',Geolocation.store_current);
                     document.getElementById('currentLat').innerHTML = position.coords.latitude;
                     document.getElementById('currentLon').innerHTML = position.coords.longitude;
 
                     $('.stores').html('');
-                    for(var s in this.stores)
+                    for(var s in Geolocation.stores)
                     {
-                        $('.stores').append('<p>Distance to '+this.stores[s].info.title+':<br/> <span id="distance">'+this.calculateDistance(stores[s].lat, this.stores[s].lng,position.coords.latitude, position.coords.longitude)+'</span> m </p>')
+                        var dist = Geolocation.calculateDistance(Geolocation.stores[s].lat, Geolocation.stores[s].lng,position.coords.latitude, position.coords.longitude)
+                        $('.stores').append('<p>Distance to '+Geolocation.stores[s].info.title+':<br/> <span id="distance">'+dist+'</span> m </p>')
+                        Geolocation.stores[s].info.dist = dist;
                     }
 
+                    /*
                     if(this.store_current!=null)
                     {
                         $('.txt.dist').show();
                         $('.txt.dist').html(this.calculateDistance(this.store_current.lat, this.store_current.lng,position.coords.latitude, position.coords.longitude)+'m');
                     }
+                    */
 
 
 
@@ -246,95 +259,139 @@ var Geolocation = new function()
 
         for(var s in this.stores)
         {
-            var img         = '';
-            var convStart   = this.convert(startPos.coords.latitude,startPos.coords.longitude);
-            var conv        = this.convert(this.stores[s].lat,this.stores[s].lng);
-            var difCoordenads =
+            var dist = Geolocation.calculateDistance(this.stores[s].lat, this.stores[s].lng,startPos.coords.latitude, startPos.coords.longitude)
+            this.stores[s].info.dist = dist;
+
+            var show = true;
+
+            switch(this.filtro)
             {
-                x: convStart.x - conv.x,
-                y: convStart.y - conv.y
-            }
+                case '*':
+                    show = true;
 
-
-            difCoordenads =
-            {
-                x: (startPos.coords.latitude     - this.stores[s].lat)*offset,
-                y: (startPos.coords.longitude    - this.stores[s].lng)*offset
-            }
-            //console.log(difCoordenads)
-
-            switch(this.stores[s].info.type)
-            {
-                case 'supercenter':
-                    img = 'walmart';
-                    break;
-
-                case 'ba':
-                    img = 'ba';
-                    break;
-
-                case 'sams':
-                    img = 'sams';
-                    break;
-
-                case 'superama':
-                    img = 'superama';
-                    break;
+                    if(dist>Geolocation.maxDistance)
+                    {
+                        show = false;
+                    }
+                break;
 
                 default:
-                    img = 'walmart';
-                    break;
+
+                    if(Geolocation.stores[s].info.type == Geolocation.filtro)
+                    {
+                        show = true;
+
+                        if(dist>Geolocation.maxDistance)
+                        {
+                            show = false;
+                        }
+                    }
+                    else
+                    {
+                        show = false;
+                    }
+                break;
             }
 
-            var object 	= document.createElement('a-plane');
-            object.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
-            object.setAttribute("src"		, "#pin");
-            object.setAttribute("material"  , "transparent: true;");
-            object.setAttribute("width"		, "2");
-            object.setAttribute("height"	, "2");
-            object.setAttribute("look-at"	, "[camera]");
-            object.setAttribute("show-info" , JSON.stringify(this.stores[s]));
+            if(show)
+            {
+                var img         = '';
+                var convStart   = Geolocation.convert(startPos.coords.latitude,startPos.coords.longitude);
+                var conv        = Geolocation.convert(this.stores[s].lat,this.stores[s].lng);
+                var difCoordenads =
+                {
+                    x: convStart.x - conv.x,
+                    y: convStart.y - conv.y
+                }
 
-            var logo 	= document.createElement('a-plane');
-            logo.setAttribute("position"	, '0 .2 1');
-            logo.setAttribute("src"		    , "#img_"+img);
-            logo.setAttribute("material"    , "transparent: true;");
-            logo.setAttribute("width"		, ".7");
-            logo.setAttribute("height"	    , ".7");
-            logo.setAttribute("look-at"	    , "[camera]");
+                difCoordenads =
+                {
+                    x: (startPos.coords.latitude     - this.stores[s].lat)*offset,
+                    y: (startPos.coords.longitude    - this.stores[s].lng)*offset
+                }
+                //console.log(difCoordenads)
 
-            /*
-            var animation 	= document.createElement("a-animation");
-            animation.setAttribute("id"			, "anim");
-            animation.setAttribute("attribute"	, "rotation");
-            animation.setAttribute("from"		, "0 -45 0");
-            animation.setAttribute("to"			, "0 45 0");
-            animation.setAttribute("dur"		, "3000");
-            animation.setAttribute("repeat"		, "indefinite");
-            animation.setAttribute("easing"		, "linear");
-            logo.appendChild(animation);
-            */
-            /*
+                switch(this.stores[s].info.type)
+                {
+                    case 'supercenter':
+                        img = 'walmart';
+                        break;
 
-             <a-animation attribute="rotation"
-             dur="10000"
-             fill="forwards"
-             to="0 360 0"
-             repeat="indefinite"></a-animation>
+                    case 'ba':
+                        img = 'ba';
+                        break;
 
-            var box	= document.createElement('a-box');
-            box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
-            box.setAttribute("rotation"	, "0 45 0");
-            box.setAttribute("color"    , color);
-            */
+                    case 'sams':
+                        img = 'sams';
+                        break;
 
-            //box.setAttribute("show-info", JSON.stringify(this.stores[s]));
-            //box.setAttribute("look-at"	, "[camera]");
+                    case 'superama':
+                        img = 'superama';
+                        break;
 
-            //console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
+                    default:
+                        img = 'walmart';
+                        break;
+                }
 
-            object.appendChild(logo);
-            scene.appendChild(object);
+
+                console.log('DIST ',dist);
+                dist    = parseFloat(dist/100)*.7;
+                var y   = dist*.5;
+                console.log('SCALE ',dist);
+
+                var object 	= document.createElement('a-plane');
+                object.setAttribute("scale"	    , dist+' '+dist+' '+dist);
+                object.setAttribute("position"	, difCoordenads.x+' '+y+' '+difCoordenads.y);
+                object.setAttribute("src"		, "#pin");
+                object.setAttribute("material"  , "transparent: true;");
+                object.setAttribute("width"		, "2");
+                object.setAttribute("height"	, "2");
+                object.setAttribute("look-at"	, "[camera]");
+                object.setAttribute("show-info" , Geolocation.stores[s].id);
+
+                var logo 	= document.createElement('a-plane');
+                logo.setAttribute("position"	, '0 .2 1');
+                logo.setAttribute("src"		    , "#img_"+img);
+                logo.setAttribute("material"    , "transparent: true;");
+                logo.setAttribute("width"		, ".65");
+                logo.setAttribute("height"	    , ".65");
+                logo.setAttribute("look-at"	    , "[camera]");
+
+                /*
+                 var animation 	= document.createElement("a-animation");
+                 animation.setAttribute("id"			, "anim");
+                 animation.setAttribute("attribute"	, "rotation");
+                 animation.setAttribute("from"		, "0 -45 0");
+                 animation.setAttribute("to"			, "0 45 0");
+                 animation.setAttribute("dur"		, "3000");
+                 animation.setAttribute("repeat"		, "indefinite");
+                 animation.setAttribute("easing"		, "linear");
+                 logo.appendChild(animation);
+                 */
+                /*
+
+                 <a-animation attribute="rotation"
+                 dur="10000"
+                 fill="forwards"
+                 to="0 360 0"
+                 repeat="indefinite"></a-animation>
+
+                 var box	= document.createElement('a-box');
+                 box.setAttribute("position"	, difCoordenads.x+' 0.5 '+difCoordenads.y);
+                 box.setAttribute("rotation"	, "0 45 0");
+                 box.setAttribute("color"    , color);
+                 */
+
+                //box.setAttribute("show-info", JSON.stringify(this.stores[s]));
+                //box.setAttribute("look-at"	, "[camera]");
+
+                //console.log('position' , difCoordenads.x+' 0.5 '+difCoordenads.y)
+
+                object.appendChild(logo);
+                scene.appendChild(object);
+            }
+
         }
 
         var norte	= document.createElement('a-entity');
@@ -556,6 +613,14 @@ var Geolocation = new function()
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
         return d;
+    }
+
+    this.filter = function(value)
+    {
+        console.log('this.startPos ',this.startPos)
+        this.filtro = value;
+        $('#pointers').html('');
+        this.generatePin(Geolocation.startPos);
     }
 }
 

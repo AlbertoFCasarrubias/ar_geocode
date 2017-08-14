@@ -18,8 +18,9 @@ AFRAME.registerComponent('show-info', {
 
     clickHandler: function hrefClickHandler()
     {
-        var store   = JSON.parse(this.data);
-        var info    = store.info;
+
+        var store   = Geolocation.stores.filter(x => x.id == this.data);
+        var info    = store[0].info;
         var img     = '';
         var rutaimg = 'assets/img/';
 
@@ -30,10 +31,6 @@ AFRAME.registerComponent('show-info', {
 
         switch(info.type)
         {
-            case 'supercenter':
-                img = '<img src="'+rutaimg+'walmart.png">';
-            break;
-
             case 'ba':
                 img = '<img src="'+rutaimg+'ba.png">';
             break;
@@ -54,17 +51,23 @@ AFRAME.registerComponent('show-info', {
         $('.info .logo').append(img);
         $('.info .datos').append('<span class="title">'+info.title+'</span>');
         $('.info .datos').append('<span class="txt">'+info.horario+'</span>');
-        $('.info .datos').append('<span class="txt dist">Calculando...</span>');
         $('.info .datos').append('<span class="txt">'+info.promo+'</span>');
         $('.info .datos').append('<span class="txt">'+info.desc+'</span>');
         $('.info .datos').append('<span class="txt">'+info.info+'</span>');
 
+        if(info.dist>1000)
+        {
+            $('.info .datos').append('<span class="txt">'+parseFloat(info.dist/1000).toFixed(2)+'Km</span>');
+        }
+        else
+        {
+            $('.info .datos').append('<span class="txt">'+parseFloat(info.dist).toFixed(2)+'m</span>');
+        }
+
         $('.info').show();
         $('.info').css('opacity',1);
-        //$('.info').css('top',0);
 
-
-        store_current = store;
+        Geolocation.store_current = store;
         /*
 
         var position = this.el.getAttribute('position');

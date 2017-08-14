@@ -29,13 +29,13 @@
     </div>
     <div class="brujula"></div>
     <div class="filter">
-        <select class="select">
+        <select class="select" onchange="Geolocation.filter(this.value)">
             <option value="" selected>Filter</option>
-            <option value="1">All</option>
-            <option value="2">Supercenter</option>
-            <option value="3">Superama</option>
-            <option value="3">Bodega Aurrera</option>
-            <option value="3">Sam's Club</option>
+            <option value="*">All</option>
+            <option value="sc">Supercenter</option>
+            <option value="superama">Superama</option>
+            <option value="ba">Bodega Aurrera</option>
+            <option value="sams">Sam's Club</option>
         </select>
     </div>
 </header>
