@@ -119,15 +119,18 @@ function onHeadingChange(event) {
         var phase = positionCurrent.hng < 0 ? 360 + positionCurrent.hng : positionCurrent.hng;
         //positionHng.textContent = (360 - phase | 0) + "°";
 
-        console.log('positionCurrent.hng ',positionCurrent.hng);
+        //console.log('positionCurrent.hng ',positionCurrent.hng);
         //console.log( (360 - phase | 0) + "°");
 
-
-        setTimeout(function()
+        if(ajusteRot == null && positionCurrent.hng != null && positionCurrent.hng != 0)
         {
-            console.log('timeout');
-            adjustRotationScene();
-        },1000)
+            setTimeout(function()
+            {
+                console.log('timeout');
+                adjustRotationScene();
+            },1000)
+        }
+
 
 
 
