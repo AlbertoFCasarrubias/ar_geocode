@@ -103,15 +103,15 @@ function onHeadingChange(event) {
         var phase = positionCurrent.hng < 0 ? 360 + positionCurrent.hng : positionCurrent.hng;
         //positionHng.textContent = (360 - phase | 0) + "°";
 
-        console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
-        console.log( (360 - phase | 0) + "°");
+        //console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
+        //console.log( (360 - phase | 0) + "°");
 
 
         if(ajusteRot == null && positionCurrent.hng!=0)
         {
             ajusteRot = 90 - positionCurrent.hng;
-            alert('Ajuste: '+ajusteRot);
-            //$('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
+            console.log('Ajuste: '+ajusteRot);
+            $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
         }
 
         //$('#pointers').attr('rotation','0 '+ajusteRot+' 0');
@@ -304,8 +304,8 @@ window.onload = function()
     //ajuste inical mundo, mandar el norte arriba
     $('#pointers').attr('rotation','0 -90 0');
 
-    //ajuste por la posicion inicial del teléfono con respecto al norte
-    $('#pointers').attr('rotation','0 146 0');
+    //ajuste por la posicion inicial del teléfono con respecto al norte, prueba
+   // $('#pointers').attr('rotation','0 146 0');
 
 
 
