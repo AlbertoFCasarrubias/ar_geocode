@@ -104,7 +104,7 @@ var Geolocation = new function()
     this.ajusteRot = null;
     this.positionHng;
     this.defaultOrientation;
-    Geolocation.positionCurrent = {
+    this.positionCurrent = {
         lat: null,
         lng: null,
         hng: null
