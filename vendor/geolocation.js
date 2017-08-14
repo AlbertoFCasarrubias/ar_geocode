@@ -105,21 +105,12 @@ function onHeadingChange(event) {
         console.log('positionCurrent.hng ',positionCurrent.hng,positionCurrent);
         console.log( (360 - phase | 0) + "°");
 
-        /*
-        if(worldAdjustRotation==null != worldAdjustRotation !=0)
-        {
-            worldAdjustRotation = positionCurrent.hng;
-            $('#pointers').attr('rotation','0 '+positionCurrent.hng+' 0');
-            alert('Ajuste: '+parseInt(positionCurrent.hng));
-        }
-        */
-
         var ajusteRot = null;
-
         if(ajusteRot == null)
         {
             ajusteRot = 90 - positionCurrent.hng;
-            $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
+            alert('Ajuste: '+ajusteRot);
+            //$('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
         }
 
         //$('#pointers').attr('rotation','0 '+ajusteRot+' 0');
