@@ -1,5 +1,5 @@
 define( [ 'module'	// to set .baseURL
-	, './threex.animation'
+	, './threex.animation.js'
 	, './threex.animations'
 	, './threex.minecraft'
 	, './threex.minecraftcharbodyanim'

@@ -21,6 +21,7 @@ AFRAME.registerComponent('show-info', {
         var store   = JSON.parse(this.data);
         var info    = store.info;
         var img     = '';
+        var rutaimg = 'assets/img/';
 
         console.log('INFO: ',info);
 
@@ -30,15 +31,15 @@ AFRAME.registerComponent('show-info', {
         switch(info.type)
         {
             case 'supercenter':
-                img = '<img src="img/walmart.png">';
+                img = '<img src="'+rutaimg+'walmart.png">';
             break;
 
             case 'ba':
-                img = '<img src="img/ba.png">';
+                img = '<img src="'+rutaimg+'ba.png">';
             break;
 
             default:
-                img = '<img src="img/walmart.png">';
+                img = '<img src="'+rutaimg+'walmart.png">';
             break;
         }
 
@@ -52,7 +53,7 @@ AFRAME.registerComponent('show-info', {
 
         $('.info').show();
         $('.info').css('opacity',1);
-        $('.info').css('top',0);
+        //$('.info').css('top',0);
 
 
         store_current = store;

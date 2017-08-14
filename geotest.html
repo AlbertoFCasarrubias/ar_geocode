@@ -1,19 +1,47 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <script src="vendor/geolocation.js"></script>
-    <script src="vendor/aframe-showInfo.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+
+    <script src="assets/js/aframe.min.js"></script>
+    <script src="assets/js/aframe-look-at-component.min.js"></script>
+    <script src="assets/js/aframe-showInfo.js"></script>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/geolocation.js"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+
+
 </head>
 <body>
-<div class="debug">
-    debug
-</div>
-<div class="brujula">
-</div>
+<header>
+    <div class="logo">
+        <img src="assets/img/walmartBlanco.png">
+    </div>
+    <div class="debug">
+        debug
+    </div>
+    <div class="brujula"></div>
+    <div class="filter">
+        <select>
+            <option value="" selected>Filter</option>
+            <option value="1">All</option>
+            <option value="2">Supercenter</option>
+            <option value="3">Superama</option>
+            <option value="3">Bodega Aurrera</option>
+            <option value="3">Sam's Club</option>
+        </select>
+        <label>Materialize Select</label>
+    </div>
+</header>
+
+
 <div id="tripmeter" style="position: absolute; z-index:9; width: 100%; height: auto;">
     <p>
         Starting Location (lat, lon):<br/>
@@ -33,12 +61,12 @@
 </div>
 <a-scene>
     <a-assets>
-        <img id="img_ba" src="img/ba.png">
-        <img id="img_sams" src="img/sams.png">
-        <img id="img_superama" src="img/superama.png">
-        <img id="img_walmart" src="img/walmart.png">
-        <a-asset-item id="superama-obj" src="obj/spark.obj"></a-asset-item>
-        <a-asset-item id="superama-mtl" src="obj/spark.mtl"></a-asset-item>
+        <img id="img_ba" src="assets/img/ba.png">
+        <img id="img_sams" src="assets/img/sams.png">
+        <img id="img_superama" src="assets/img/superama.png">
+        <img id="img_walmart" src="assets/img/walmart.png">
+        <a-asset-item id="superama-obj" src="assets/obj/spark.obj"></a-asset-item>
+        <a-asset-item id="superama-mtl" src="assets/obj/spark.mtl"></a-asset-item>
     </a-assets>
 
     <!--a-entity id="cameraControl" position="0 0 0" rotation="0 0 0"-->
@@ -54,9 +82,6 @@
                          fill="backwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
         </a-entity>
     </a-entity>
-
-
-
     <a-sky color="#ECECEC"></a-sky>
     <a-entity id="pointers" rotation="0 0 0"></a-entity>
 </a-scene>
