@@ -24,14 +24,17 @@ var positionCurrent = {
 
 function adjustRotationScene()
 {
-    console.log('adjustRotationScene');
-    console.log('ajusteRot '+ajusteRot);
-    console.log('positionCurrent ',positionCurrent);
-    if(ajusteRot == null )
+
+    if(ajusteRot == null && positionCurrent.hng!=null)
     {
+        console.log('adjustRotationScene');
+        console.log('ajusteRot '+ajusteRot);
+        console.log('positionCurrent ',positionCurrent);
+
         ajusteRot = 90 - positionCurrent.hng;
-        console.log('Ajuste rotación: '+ajusteRot);
         $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
+
+        console.log('Ajuste rotación: '+ajusteRot);
     }
 }
 
