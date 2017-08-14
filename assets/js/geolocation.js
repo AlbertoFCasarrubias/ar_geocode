@@ -104,7 +104,7 @@ var Geolocation = new function()
     this.ajusteRot = null;
     this.positionHng;
     this.defaultOrientation;
-    Geoposition.positionCurrent = {
+    Geolocation.positionCurrent = {
         lat: null,
         lng: null,
         hng: null
@@ -407,18 +407,18 @@ var Geolocation = new function()
 
     this.adjustRotationScene= function()
     {
-        if(Geoposition.ajusteRot == null && Geoposition.positionCurrent.hng != null && Geoposition.positionCurrent.hng != 0)
+        if(Geolocation.ajusteRot == null && Geolocation.positionCurrent.hng != null && Geolocation.positionCurrent.hng != 0)
         {
             console.log('5. adjustRotationScene HNG negativo');
-            console.log('ajusteRot '+Geoposition.ajusteRot);
-            console.log('positionCurrent ',Geoposition.positionCurrent);
+            console.log('ajusteRot '+Geolocation.ajusteRot);
+            console.log('positionCurrent ',Geolocation.positionCurrent);
 
             //ajusteRot = (90 - positionCurrent.hng) * -1;
-            this.ajusteRot = Geoposition.positionCurrent.hng - 100 ;
-            $('.orientation').html('<p>AJUSTE ROT: '+Geoposition.ajusteRot+' </p>')
-            $('#pointers').attr('rotation','0 '+Geoposition.ajusteRot+' 0');
+            this.ajusteRot = Geolocation.positionCurrent.hng - 100 ;
+            $('.orientation').html('<p>AJUSTE ROT: '+Geolocation.ajusteRot+' </p>')
+            $('#pointers').attr('rotation','0 '+Geolocation.ajusteRot+' 0');
 
-            console.log('Ajuste rotación: '+Geoposition.ajusteRot);
+            console.log('Ajuste rotación: '+Geolocation.ajusteRot);
         }
     }
 
@@ -504,20 +504,20 @@ var Geolocation = new function()
                 }
             }
 
-            Geoposition.positionCurrent.hng = heading + adjustment;
+            Geolocation.positionCurrent.hng = heading + adjustment;
 
-            var phase = Geoposition.positionCurrent.hng < 0 ? 360 + Geoposition.positionCurrent.hng : Geoposition.positionCurrent.hng;
+            var phase = Geolocation.positionCurrent.hng < 0 ? 360 + Geolocation.positionCurrent.hng : Geolocation.positionCurrent.hng;
             //positionHng.textContent = (360 - phase | 0) + "°";
 
             //console.log('positionCurrent.hng ',positionCurrent.hng);
             //console.log( (360 - phase | 0) + "°");
 
-            if(this.ajusteRot == null && Geoposition.positionCurrent.hng != null && Geoposition.positionCurrent.hng != 0)
+            if(Geolocation.ajusteRot == null && Geolocation.positionCurrent.hng != null && Geolocation.positionCurrent.hng != 0)
             {
                 setTimeout(function()
                 {
                     console.log('timeout');
-                    this.adjustRotationScene();
+                    Geolocation.adjustRotationScene();
                 },1000)
             }
 
