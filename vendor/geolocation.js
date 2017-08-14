@@ -27,7 +27,7 @@ function adjustRotationScene()
 
     if(ajusteRot == null && positionCurrent.hng != null && positionCurrent.hng != 0)
     {
-        console.log('adjustRotationScene HNG negativo');
+        console.log('1. adjustRotationScene HNG negativo');
         console.log('ajusteRot '+ajusteRot);
         console.log('positionCurrent ',positionCurrent);
 
@@ -171,7 +171,8 @@ if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", onHeadingChange);
 
 } else {
-    alert("Sorry, your browser doesn't support Device Orientation");
+    console.log("Sorry, your browser doesn't support Device Orientation");
+    $('#pointers').attr('rotation','0 -90 0');
 }
 
 
@@ -305,7 +306,7 @@ window.onload = function()
 
 
     //ajuste inical mundo, mandar el norte arriba
-    $('#pointers').attr('rotation','0 -90 0');
+    //$('#pointers').attr('rotation','0 -90 0');
 
     //ajuste por la posicion inicial del teléfono con respecto al norte, prueba
    // $('#pointers').attr('rotation','0 146 0');
