@@ -125,7 +125,7 @@ function onHeadingChange(event) {
 
         setTimeout(function()
         {
-
+            console.log('timeout');
             adjustRotationScene();
         },1000)
 
