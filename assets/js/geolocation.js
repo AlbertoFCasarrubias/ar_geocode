@@ -104,7 +104,7 @@ var Geolocation = new function()
     this.ajusteRot = null;
     this.positionHng;
     this.defaultOrientation;
-    this.positionCurrent = {
+    Geoposition.positionCurrent = {
         lat: null,
         lng: null,
         hng: null
@@ -407,18 +407,18 @@ var Geolocation = new function()
 
     this.adjustRotationScene= function()
     {
-        if(this.ajusteRot == null && this.positionCurrent.hng != null && this.positionCurrent.hng != 0)
+        if(Geoposition.ajusteRot == null && Geoposition.positionCurrent.hng != null && Geoposition.positionCurrent.hng != 0)
         {
             console.log('5. adjustRotationScene HNG negativo');
-            console.log('ajusteRot '+this.ajusteRot);
-            console.log('positionCurrent ',this.positionCurrent);
+            console.log('ajusteRot '+Geoposition.ajusteRot);
+            console.log('positionCurrent ',Geoposition.positionCurrent);
 
             //ajusteRot = (90 - positionCurrent.hng) * -1;
-            this.ajusteRot = this.positionCurrent.hng - 100 ;
-            $('.orientation').html('<p>AJUSTE ROT: '+this.ajusteRot+' </p>')
-            $('#pointers').attr('rotation','0 '+this.ajusteRot+' 0');
+            this.ajusteRot = Geoposition.positionCurrent.hng - 100 ;
+            $('.orientation').html('<p>AJUSTE ROT: '+Geoposition.ajusteRot+' </p>')
+            $('#pointers').attr('rotation','0 '+Geoposition.ajusteRot+' 0');
 
-            console.log('Ajuste rotación: '+this.ajusteRot);
+            console.log('Ajuste rotación: '+Geoposition.ajusteRot);
         }
     }
 
@@ -504,15 +504,15 @@ var Geolocation = new function()
                 }
             }
 
-            this.positionCurrent.hng = heading + adjustment;
+            Geoposition.positionCurrent.hng = heading + adjustment;
 
-            var phase = this.positionCurrent.hng < 0 ? 360 + this.positionCurrent.hng : this.positionCurrent.hng;
+            var phase = Geoposition.positionCurrent.hng < 0 ? 360 + Geoposition.positionCurrent.hng : Geoposition.positionCurrent.hng;
             //positionHng.textContent = (360 - phase | 0) + "°";
 
             //console.log('positionCurrent.hng ',positionCurrent.hng);
             //console.log( (360 - phase | 0) + "°");
 
-            if(this.ajusteRot == null && this.positionCurrent.hng != null && this.positionCurrent.hng != 0)
+            if(this.ajusteRot == null && Geoposition.positionCurrent.hng != null && Geoposition.positionCurrent.hng != 0)
             {
                 setTimeout(function()
                 {

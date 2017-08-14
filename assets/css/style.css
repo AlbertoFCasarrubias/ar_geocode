@@ -26,6 +26,11 @@ header {
     left: 0;
     background: #78b9e7 !important;
     padding: 0 20px; }
+  header .brujula {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    z-index: 9999; }
 
 #tripmeter {
   display: none;
@@ -35,12 +40,6 @@ header {
   position: absolute;
   top: 100px;
   left: 0;
-  z-index: 9999; }
-
-.brujula {
-  position: absolute;
-  top: 0;
-  right: 0;
   z-index: 9999; }
 
 .info {
