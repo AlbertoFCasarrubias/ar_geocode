@@ -22,6 +22,19 @@ var positionCurrent = {
     hng: null
 };
 
+function adjustRotationScene()
+{
+    console.log('adjustRotationScene');
+    console.log('ajusteRot '+ajusteRot);
+    console.log('positionCurrent ',positionCurrent);
+    if(ajusteRot == null )
+    {
+        ajusteRot = 90 - positionCurrent.hng;
+        console.log('Ajuste rotación: '+ajusteRot);
+        $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
+    }
+}
+
 function getBrowserOrientation() {
     var orientation;
     if (screen.orientation && screen.orientation.type) {
@@ -109,7 +122,7 @@ function onHeadingChange(event) {
 
 
 
-        //$('#pointers').attr('rotation','0 '+ajusteRot+' 0');
+        adjustRotationScene();
 
         $('.brujula').html(parseFloat(positionCurrent.hng).toFixed(2)+ "°")
 
@@ -294,15 +307,7 @@ window.onload = function()
             document.getElementById('startLat').innerHTML = startPos.coords.latitude;
             document.getElementById('startLon').innerHTML = startPos.coords.longitude;
 
-            console.log('get current position');
-            console.log('ajusteRot '+ajusteRot);
-            console.log('positionCurrent ',positionCurrent);
-            if(ajusteRot == null )
-            {
-                ajusteRot = 90 - positionCurrent.hng;
-                console.log('Ajuste rotación: '+ajusteRot);
-                $('.orientation').html('<p>AJUSTE ROT: '+ajusteRot+' </p>')
-            }
+
 
             //console.log('startPos ', startPos);
             //console.log('camera '  , $('#camera').attr('position'));
