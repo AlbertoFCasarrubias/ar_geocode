@@ -296,7 +296,7 @@ window.onload = function()
 
             console.log('get current position');
             console.log('ajusteRot '+ajusteRot);
-            console.log('positionCurrent '+positionCurrent);
+            console.log('positionCurrent ',positionCurrent);
             if(ajusteRot == null )
             {
                 ajusteRot = 90 - positionCurrent.hng;
