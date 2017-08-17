@@ -46,6 +46,15 @@ header{
     z-index: 9999;
   }
 
+  .feedback{
+    position: absolute;
+    top:15px;
+    right:10px;
+    z-index: 9999;
+    cursor: pointer;
+    color: #fff;
+  }
+
 
 }
 
